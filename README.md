@@ -31,6 +31,8 @@ QuickCart/
 ├── style.css
 └── style.js
 
-👩‍💻 Author
-Sonam Sharma
+'''markdown
+
+## 👩‍💻 Author
+**Sonam Sharma**
 Built as a web development project to practice frontend development and responsive design.
