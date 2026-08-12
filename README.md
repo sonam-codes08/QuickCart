@@ -33,5 +33,7 @@ QuickCart/
 ```
 
 ## 👩‍💻 Author
+
 **Sonam Sharma**
+
 Built as a web development project to practice frontend development and responsive design.
