@@ -30,8 +30,7 @@ QuickCart/
 ├── index.html
 ├── style.css
 └── style.js
-
-'''markdown
+'''
 
 ## 👩‍💻 Author
 **Sonam Sharma**
