@@ -1,26 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>QuickCart - Groceries Delivered Fast</title>
-
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickCart — Groceries delivered in minutes</title>
+<meta name="description" content="QuickCart — a quick-commerce grocery delivery concept. Browse categories, add to cart, checkout. Portfolio project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <header>
-        <h1>QuickCart</h1>
-        <p>Groceries delivered to your doorstep</p>
-    </header>
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="header-row">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 6H5L7 15H18L20 8H7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="19" r="1.4" fill="#fff"/><circle cx="17" cy="19" r="1.4" fill="#fff"/></svg>
+      </div>
+      <span class="logo-text">Quick<span>Cart</span></span>
+    </div>
 
-    <main>
-        <h2>Welcome to QuickCart 🛒</h2>
-        <p>Your everyday essentials, just a click away.</p>
-    </main>
+    <div class="location-pill desktop-only" id="locationPill">
+      <svg class="pin" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-7.58 7-12.5A7 7 0 0 0 5 9.5C5 14.42 12 22 12 22Z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.4" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="location-text">
+        <span class="eta">Delivery in 8 min</span>
+        <span class="addr" id="locationAddr">Connaught Place, New Delhi</span>
+      </div>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="location-dropdown hidden" id="locationDropdown"></div>
+    </div>
 
-    <script src="script.js"></script>
+    <div class="search-wrap desktop-only">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="searchInput" placeholder="Search for atta, dal, chips, milk...">
+    </div>
+
+    <div class="header-actions">
+      <button class="btn-ghost desktop-only" id="loginBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2"/><path d="M4.5 20c1.6-3.6 4.6-5.5 7.5-5.5s5.9 1.9 7.5 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Login
+      </button>
+      <button class="btn-ghost mobile-only" id="loginBtnMobile" aria-label="Login" style="padding:9px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2"/><path d="M4.5 20c1.6-3.6 4.6-5.5 7.5-5.5s5.9 1.9 7.5 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 4H5L7.2 14.6a2 2 0 0 0 2 1.6H17a2 2 0 0 0 2-1.5L20.5 8H6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.3" fill="#fff"/><circle cx="17" cy="20" r="1.3" fill="#fff"/></svg>
+        <span class="cart-total" id="cartHeaderTotal">₹0</span>
+        <span class="cart-badge hidden" id="cartBadge">0</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="header-row-mobile">
+    <div class="location-pill mobile-only" id="locationPillMobile" style="flex:1;position:relative;">
+      <svg class="pin" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-7.58 7-12.5A7 7 0 0 0 5 9.5C5 14.42 12 22 12 22Z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.4" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="location-text">
+        <span class="eta">8 min delivery</span>
+        <span class="addr" id="locationAddrMobile">Connaught Place, ND</span>
+      </div>
+    </div>
+  </div>
+  <div class="header-row-mobile" style="padding-top:0;">
+    <div class="search-wrap mobile-only" style="flex:1;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="searchInputMobile" placeholder="Search for atta, dal, chips...">
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy reveal">
+      <span class="eyebrow">🥬 Fresh groceries, faster than fast</span>
+      <h1>Your grocery run,<br>now a <em>doorbell</em>.</h1>
+      <p class="lede">Fruits, snacks, dairy, and everything in between — picked, packed and at your door in minutes. No queues, no "sorry we're out of stock."</p>
+      <div class="hero-cta">
+        <button class="btn-primary" id="heroShopBtn">Start shopping</button>
+        <button class="btn-secondary" id="heroCatBtn">Browse categories</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>8 min</b><span>avg. delivery time</span></div>
+        <div class="stat"><b>1,200+</b><span>products in stock</span></div>
+        <div class="stat"><b>4.8★</b><span>rated by shoppers</span></div>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="visual-grid">
+        <div class="visual-tile" style="background:#DCEEDB;">🍎</div>
+        <div class="visual-tile" style="background:#FFF3D6;">🥛</div>
+        <div class="visual-tile" style="background:#FFE3D3;">🍪</div>
+        <div class="visual-tile" style="background:#DCEFF7;">🧃</div>
+        <div class="visual-tile" style="background:#EDE3F7;">🧴</div>
+        <div class="visual-tile" style="background:#F6E8D8;">🍞</div>
+      </div>
+      <div class="stamp">
+        <svg class="ring" width="150" height="150" viewBox="0 0 150 150">
+          <defs><path id="stampCircle" d="M75,75 m-58,0 a58,58 0 1,1 116,0 a58,58 0 1,1 -116,0"/></defs>
+          <text font-family="Space Mono, monospace" font-size="10.5" font-weight="700" fill="#0F3D2E" letter-spacing="2">
+            <textPath href="#stampCircle">QUICK DELIVERY • QUICK DELIVERY • </textPath>
+          </text>
+        </svg>
+        <div class="core"><b>8</b><span>MIN</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATEGORIES ============ -->
+<section id="categoriesSection">
+  <div class="section-head reveal">
+    <h2>Shop by category</h2>
+    <p class="muted">Everything on your list, sorted the way you'd sort it yourself.</p>
+  </div>
+  <div class="category-scroller reveal" id="categoryScroller"></div>
+</section>
+
+<!-- ============ PRODUCTS ============ -->
+<section id="products">
+  <div class="section-head reveal">
+    <h2 id="productsTitle">Popular right now</h2>
+    <span class="muted mono" id="resultsCount"></span>
+  </div>
+  <div class="product-grid reveal" id="productGrid"></div>
+  <p class="no-results hidden" id="noResults">No products match your search — try "milk", "chips" or "juice".</p>
+</section>
+
+<!-- ============ WHY US STRIP ============ -->
+<section class="strip">
+  <div class="strip-inner">
+    <div class="strip-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <div><b>Lightning delivery</b><span>Most orders arrive in under 8 minutes.</span></div>
+    </div>
+    <div class="strip-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2 4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6l-8-4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <div><b>Quality checked</b><span>Every item inspected before it ships.</span></div>
+    </div>
+    <div class="strip-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.2 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <div><b>Live order tracking</b><span>Know exactly when your basket's arriving.</span></div>
+    </div>
+    <div class="strip-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 10h18M6 6h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.6"/></svg>
+      <div><b>Easy returns</b><span>Not happy? We'll sort it, no questions.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="overlay" id="overlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="drawer-head">
+    <h3>Your cart</h3>
+    <button id="closeCart" aria-label="Close cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="drawer-items hidden" id="drawerItems"></div>
+  <div class="drawer-empty" id="drawerEmpty">
+    <div class="emoji-big">🛒</div>
+    <h4 style="margin:0;font-family:'Fraunces',serif;">Your cart is empty</h4>
+    <p>Add fruits, snacks or a midnight ice-cream — we'll get it there fast.</p>
+    <button class="btn-primary" id="drawerShopBtn">Start shopping</button>
+  </div>
+  <div class="drawer-summary hidden" id="drawerSummary">
+    <div class="srow"><span>Subtotal</span><b id="sumSubtotal">₹0</b></div>
+    <div class="srow"><span>Delivery fee</span><b id="sumDelivery">₹0</b></div>
+    <div class="srow"><span>Handling fee</span><b id="sumHandling">₹0</b></div>
+    <div class="srow total"><span>To pay</span><b id="sumTotal">₹0</b></div>
+    <button class="checkout-btn" id="checkoutBtn">Proceed to checkout — ₹<span id="checkoutTotal">0</span></button>
+  </div>
+</aside>
+
+<div class="mobile-cart-bar hidden" id="mobileCartBar">
+  <span id="mobileCartInfo">0 items · ₹0</span>
+  <button id="mobileCartBtn">View cart</button>
+</div>
+
+<!-- ============ LOGIN MODAL ============ -->
+<div class="modal" id="loginModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <h3 id="modalTitle">Welcome back</h3>
+    <p class="sub" id="modalSub">Log in to track orders and reorder faster.</p>
+    <div class="modal-tabs">
+      <button class="active" id="tabLogin">Login</button>
+      <button id="tabSignup">Sign up</button>
+    </div>
+    <form id="loginForm">
+      <div class="field"><label>Email</label><input type="email" placeholder="you@example.com" required></div>
+      <div class="field"><label>Password</label><input type="password" placeholder="••••••••" required></div>
+      <button type="submit" class="modal-submit" id="modalSubmitBtn">Log in</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo-text">Quick<span style="color:var(--lime);">Cart</span></span>
+      <p>A quick-commerce grocery concept — fruits, snacks, dairy and daily essentials delivered in minutes. Built as a front-end portfolio project.</p>
+    </div>
+    <div class="footer-newsletter">
+      <h4>Get restock alerts</h4>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="Your email" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer-links">
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#">About us</a>
+      <a href="#">Careers</a>
+      <a href="#">Blog</a>
+    </div>
+    <div class="footer-col">
+      <h5>Categories</h5>
+      <a href="#categoriesSection">Fruits &amp; Vegetables</a>
+      <a href="#categoriesSection">Dairy &amp; Breakfast</a>
+      <a href="#categoriesSection">Snacks</a>
+    </div>
+    <div class="footer-col">
+      <h5>Support</h5>
+      <a href="#">Help center</a>
+      <a href="#">Track order</a>
+      <a href="#">Refunds</a>
+    </div>
+    <div class="footer-col">
+      <h5>Follow</h5>
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M7 10v7M7 7.2v.1M12 17v-4.5c0-1.4 1-2.5 2.4-2.5S17 11.1 17 12.5V17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.35 4.68-4.58 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 QuickCart. Concept project — not a real store.</span>
+    <span>Designed &amp; built with HTML, CSS &amp; JavaScript.</span>
+  </div>
+</footer>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="style.js"></script>
 </body>
 </html>
