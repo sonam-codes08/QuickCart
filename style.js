@@ -179,6 +179,7 @@
   function addToCart(id){
     cart[id] = (cart[id] || 0) + 1;
     updateCardUI(id);
+    syncDrawerCardUI(id);
     renderCart();
     updateHeaderCart();
     pulseCart();
@@ -248,6 +249,8 @@
       $('#checkoutTotal').textContent = t.total.toLocaleString('en-IN');
     }
   }
+
+  function syncDrawerCardUI(){ /* re-render handles it via renderCart() */ }
 
   function updateHeaderCart(){
     const t = cartTotals();
