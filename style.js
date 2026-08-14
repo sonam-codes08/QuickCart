@@ -291,19 +291,6 @@
     $('#overlay').classList.remove('open');
   }
 
-  /* ---------------- MODAL ---------------- */
-  function openModal(){ $('#loginModal').classList.add('open'); }
-  function closeModal(){ $('#loginModal').classList.remove('open'); }
-
-  function setModalTab(tab){
-    const isLogin = tab === 'login';
-    $('#tabLogin').classList.toggle('active', isLogin);
-    $('#tabSignup').classList.toggle('active', !isLogin);
-    $('#modalTitle').textContent = isLogin ? 'Welcome back' : 'Create your account';
-    $('#modalSub').textContent = isLogin ? 'Log in to track orders and reorder faster.' : 'Sign up to start ordering in minutes.';
-    $('#modalSubmitBtn').textContent = isLogin ? 'Log in' : 'Sign up';
-  }
-
   /* ---------------- LOCATION ---------------- */
   function renderLocationDropdown(){
     const dd = $('#locationDropdown');
@@ -378,7 +365,7 @@
     // cart open/close
     $('#cartBtn').addEventListener('click', openCart);
     $('#closeCart').addEventListener('click', closeCart);
-    $('#overlay').addEventListener('click', () => { closeCart(); closeModal(); });
+    $('#overlay').addEventListener('click', closeCart);
     $('#mobileCartBtn').addEventListener('click', openCart);
     $('#drawerShopBtn').addEventListener('click', () => {
       closeCart();
@@ -409,19 +396,6 @@
     });
     document.addEventListener('click', () => $('#locationDropdown').classList.add('hidden'));
 
-    // login modal
-    $('#loginBtn').addEventListener('click', openModal);
-    $('#loginBtnMobile').addEventListener('click', openModal);
-    $('#modalClose').addEventListener('click', closeModal);
-    $('#loginModal').addEventListener('click', (e) => { if (e.target.id === 'loginModal') closeModal(); });
-    $('#tabLogin').addEventListener('click', () => setModalTab('login'));
-    $('#tabSignup').addEventListener('click', () => setModalTab('signup'));
-    $('#loginForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      showToast('Logged in — welcome to QuickCart! (demo only)');
-      closeModal();
-    });
-
     // newsletter
     $('#newsletterForm').addEventListener('submit', (e) => {
       e.preventDefault();
@@ -429,9 +403,9 @@
       e.target.reset();
     });
 
-    // escape key closes drawer/modal
+    // escape key closes cart
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') { closeCart(); closeModal(); }
+      if (e.key === 'Escape') closeCart();
     });
   }
 
